@@ -15,8 +15,20 @@ $(document).ready(function() {
 
     var inputtedFirstName = capitalize($("input#new-first-name").val());
     var inputtedLastName = capitalize($("input#new-last-name").val());
-    var inputtedAddress = $("input#new-address").val();
-    var newContact = { firstName: inputtedFirstName, lastName: inputtedLastName, address: inputtedAddress };
+    var inputtedStreet = $("input#new-street").val();
+    var inputtedCity = $("input#new-city").val();
+    var inputtedState = $("select#new-state").val();
+    var inputtedZIP = $("input#new-ZIP").val();
+    var address = {
+      street: inputtedStreet,
+      city: inputtedCity,
+      state: inputtedState,
+      ZIP: inputtedZIP,
+      fullAddress: function() {
+        return this.street + ", " + this.city + ", " + this.state + "  " + this.ZIP;
+      }
+    };
+    var newContact = { firstName: inputtedFirstName, lastName: inputtedLastName, address: address.fullAddress() };
     allContacts.push(newContact);
 
     $("ul#contacts").empty();
@@ -38,15 +50,17 @@ $(document).ready(function() {
       $(".contact").last().click(function() {
         $("#show-contact").show();
         $("#show-contact h2").text(contact.firstName + " " + contact.lastName);
-        $(".first-name").text(contact.firstName);
-        $(".last-name").text(contact.lastName);
+        $(".name").text(contact.firstName + " " + contact.lastName);
         $(".address").text(contact.address);
       });
     });
 
     $("input#new-first-name").val("");
     $("input#new-last-name").val("");
-    $("input#new-address").val("");
+    $("input#new-street").val("");
+    $("input#new-city").val("");
+    $("input#new-state").val("");
+    $("input#new-ZIP").val("");
 
   });
 });
