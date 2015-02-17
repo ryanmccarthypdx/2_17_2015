@@ -5,7 +5,7 @@ $(document).ready(function() {
     var sideA = parseInt($("input#side-a").val());
     var sideB = parseInt($("input#side-b").val());
     var sideC = parseInt($("input#side-c").val());
-event.preventDefault();
+    event.preventDefault();
     var triangle = {
       sideA: sideA,
       sideB: sideB,
@@ -18,8 +18,8 @@ event.preventDefault();
         var side1 = input.shift();
         var side2 = input.shift();
         var side3 = input.shift();
-        if (side3 > (side2 + side1)) {
-          alert("You fool, that is no triangle!!!");
+        if (side3 >= (side2 + side1)) {
+          return "impossible"
         } else if (side3 === side1) {
           return "equilateral";
         } else if ((side2 === side3) || (side2 === side1)) {
@@ -29,15 +29,19 @@ event.preventDefault();
         }
       }
     };
-    if (triangle.type() === "scalene") {
-      $("ul#scalenes").append("<li>" + triangle.combo().join(", ") + "</li>")
+    if (triangle.type() === "impossible") {
+      alert("You fool, that is no triangle!!!");
+    } else if (triangle.type() === "scalene") {
+      $("ul#scalenes").append("<li>" + triangle.sideA + ", " + triangle.sideB + ", " + triangle.sideC + "</li>")
     } else if (triangle.type() === "isosceles") {
-      $("ul#isosceles").append("<li>" + triangle.combo().join(", ") + "</li>")
+      $("ul#isosceles").append("<li>" + triangle.sideA + ", " + triangle.sideB + ", " + triangle.sideC + "</li>")
     } else if (triangle.type() === "equilateral") {
-      $("ul#equilaterals").append("<li>" + triangle.combo().join(", ") + "</li>")
+      $("ul#equilaterals").append("<li>" + triangle.sideA + ", " + triangle.sideB + ", " + triangle.sideC + "</li>")
     }
 
+    $("input#side-a").val("");
+    $("input#side-b").val("");
+    $("input#side-c").val("");
 
   });
-
-})
+});
