@@ -1,9 +1,12 @@
 .name-pic {
   display: none;
+  text-align: center;
+
 }
 
 .alive {
   display: none;
+  text-align: center;
 }
 
 .dead {

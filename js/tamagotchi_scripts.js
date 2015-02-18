@@ -38,25 +38,39 @@ $(function() {
 
     $(".inputted-name").text(tamagotchi.moniker);
 
-    if (tamagotchi.isDead() === true) {
-      $("#picture").html("<img src='css/img/dead.jpg'>")
-    } else if (tamagotchi.isHungry() === true) {
-      $("#picture").html("<img src='css/img/hungry.png'>")
-    } else if (tamagotchi.isSleepy() === true) {
-      $("#picture").html("<img src='css.img/tired.png'>")
-    } else if (tamagotchi.isBored() === true) {
-      $("#picture").html("<img src='css/img/bored.jpg'>")
-    } else {
-      $("#picture").html('<img src="css/img/happy.png">')
-    }
-
-
+    $("#food-level").text(tamagotchi.food);
+    $("#sleep-level").text(tamagotchi.sleep);
+    $("#play-level").text(tamagotchi.play);
 
 
     $(".alive").show();
     $(".name-pic").show();
     $("#input").hide();
     event.preventDefault();
+
+    setInterval(function () {
+      tamagotchi.food = (tamagotchi.food - 1)
+      tamagotchi.sleep = (tamagotchi.sleep - 1)
+      tamagotchi.play = (tamagotchi.play - 1)
+
+      $("#food-level").text(tamagotchi.food);
+      $("#sleep-level").text(tamagotchi.sleep);
+      $("#play-level").text(tamagotchi.play);
+
+      if (tamagotchi.isDead() === true) {
+        $("#picture").html("<img src='css/img/dead.jpg'>")
+      } else if (tamagotchi.isHungry() === true) {
+        $("#picture").html("<img src='css/img/hungry.png'>")
+      } else if (tamagotchi.isSleepy() === true) {
+        $("#picture").html("<img src='css.img/tired.png'>")
+      } else if (tamagotchi.isBored() === true) {
+        $("#picture").html("<img src='css/img/bored.jpg'>")
+      } else {
+        $("#picture").html('<img src="css/img/happy.png">')
+      }
+    }, 3000);
+
+
 
   });
 });
