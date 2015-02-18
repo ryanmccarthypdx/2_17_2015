@@ -11,4 +11,9 @@
 
 .dead {
   display: none;
+  text-align: center;
+}
+
+.picture {
+  height: 150px;
 }
